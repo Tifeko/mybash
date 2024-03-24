@@ -49,13 +49,16 @@ if [[ $iatest -gt 0 ]]; then bind "set completion-ignore-case on"; fi
 if [[ $iatest -gt 0 ]]; then bind "set show-all-if-ambiguous On"; fi
 
 # Set the default editor
-export EDITOR=nvim
-export VISUAL=nvim
+export EDITOR=helix
+export VISUAL=helix
+alias hx='edit'
+alias shx='sedit'
+alias shelix='sedit'
 alias pico='edit'
 alias spico='sedit'
 alias nano='edit'
 alias snano='sedit'
-alias vim='nvim'
+alias vim='edit'
 
 # Replace batcat with cat on Fedora as batcat is not available as a RPM in any form
 if command -v lsb_release > /dev/null; then
@@ -63,6 +66,8 @@ if command -v lsb_release > /dev/null; then
 
     if [ "$DISTRIBUTION" = "Fedora" ]; then
         alias cat='bat'
+		elif [ "$DISTRIBUTION" = "Arch" ]; then
+		    alias cat='bat'
     else
         alias cat='batcat'
     fi
@@ -237,6 +242,8 @@ edit ()
 		nano -c "$@"
 	elif [ "$(type -t pico)" = "file" ]; then
 		pico "$@"
+	elif [ "$(type -t helix)" = "file" ]; then
+		helix "$@"
 	else
 		nvim "$@"
 	fi
@@ -250,6 +257,8 @@ sedit ()
 		sudo nano -c "$@"
 	elif [ "$(type -t pico)" = "file" ]; then
 		sudo pico "$@"
+	elif [ "$(type -t helix)" = "file" ]; then
+		sudo helix "$@"
 	else
 		sudo nvim "$@"
 	fi
