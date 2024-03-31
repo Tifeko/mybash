@@ -75,3 +75,5 @@ if linkConfig;then
 else
     echo -e "${RED}Something went wrong!${RC}"
 fi
+
+yay -S --needed --noconfirm zoxide trash-cli bat
